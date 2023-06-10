@@ -1,0 +1,36 @@
+Double check that your docker build command succeeded, and that you are running the built image and not some other image.
+
+Here's an example Dockerfile, the relevant docker build output (specifically the CMD step), and an example of it running:
+
+$ cat Dockerfile
+FROM ubuntu:16.04
+RUN apt-get -y update && apt-get -y install apache2 && rm -rf /var/lib/apt/lists/*
+
+CMD apachectl -DFOREGROUND
+
+
+    $ docker build -t myapache .
+Sending build context to Docker daemon 2.048 kB
+Step 1 : FROM ubuntu:16.04
+ ---> 2fa927b5cdd3
+Step 2 : RUN apt-get -y update && apt-get -y install apache2 && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> f766fd84056d
+Step 3 : CMD apachectl -DFOREGROUND
+ ---> Running in 2814d231e50e
+ ---> 774b579e43ce
+Removing intermediate container 2814d231e50e
+Successfully built 774b579e43ce
+
+    $ r run -d --name myapache -p 80:80 myapache
+4718994f1669306c64ac6846f4e0f87aa15a63a888ca7d5c8ba711f39379db57
+
+    $ http://localhost:80/
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <!--
+    Modified from the Debian original for Ubuntu
+    Last updated: 2014-03-19
+    See: https://launchpad.net/bugs/1288690
+...
+
