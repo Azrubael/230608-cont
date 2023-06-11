@@ -1,0 +1,11 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name  : az-k8s-230811
+  region: eu-central-1
+
+nodeGroups:
+  - name             : az-work-nodes-group1
+    instanceType     : t3.micro
+    desiredCapacity  : 2
