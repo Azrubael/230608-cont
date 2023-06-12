@@ -166,7 +166,7 @@ Default output format [json]:
 ##############################################
     $ kubectl config current-context
 docker-desktop
-    $ kubectl apply -f /mnt/SSDATA/CODE/Python-projects/230608-cont/230810-2pods/2-azapache.yaml --dry-run=client
+    $ kubectl apply -f 2-azapache.yaml --dry-run=client
 pod/azapache-230811 created (dry run)
 
 
