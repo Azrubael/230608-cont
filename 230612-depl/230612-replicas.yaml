@@ -1,0 +1,28 @@
+#-------------------------------------------------------------
+# Manifest File to create Replics Deployment with Labels
+# Azrubael 2023
+#-------------------------------------------------------------
+apiVersion: apps/v1
+kind:  Deployment
+metadata:
+  name: azweb-deployment-replicas
+  labels:
+    app  : az-k8s-app
+    env  : prod
+    owner: Azrubael
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      project: cia
+  template:
+    metadata:
+      labels:
+        project: cia
+    spec:
+      containers:
+        - name : cia-web
+          image: adv4000/k8sphp:version2
+          ports:
+            - containerPort: 80      

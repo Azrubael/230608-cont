@@ -1,0 +1,24 @@
+#-------------------------------------------------------------
+# Manifest File to create First Deployment with Labels
+# Azrubael 2023
+#-------------------------------------------------------------
+apiVersion: apps/v1
+kind:  Deployment
+metadata:
+  name: azweb-deployment
+  labels:
+    app : az-k8s-app
+spec:
+  selector:
+    matchLabels:
+      project: fba
+  template:
+    metadata:
+      labels:
+        project: fba
+    spec:
+      containers:
+        - name : fba-web
+          image: adv4000/k8sphp:version1
+          ports:
+            - containerPort: 80      

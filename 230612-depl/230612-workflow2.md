@@ -258,8 +258,5 @@ REVISION  CHANGE-CAUSE
 # использоваться только для тестирования
 # Далее рассмотрен процесс замены продакшн-образа ':latest'
 
-------------------------------------------
-[12] - Production image replacement [замена продакшн образа]
-[video 14:15]
     $ kubectl delete deployment/den-depl
 deployment.apps "den-depl" deleted
