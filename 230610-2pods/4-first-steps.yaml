@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name  : az-first-steps
+  labels:
+    env  : training
+    app  : main
+    tier : backend
+    owner: azrubael
+
+spec:
+  containers:
+    - name  : azbuntu-worker
+      image : azrubael/first-steps:latest
+      ports :
+        - containerPort: 80
