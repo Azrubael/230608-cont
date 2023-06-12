@@ -101,14 +101,76 @@ ip-192-168-75-46.eu-central-1.compute.internal   Ready    <none>   5m59s   v1.25
 
 -----------------------
     $ eksctl delete cluster --name az-k8s-230811
-    
+УДАЛЯТЬ ОБЯЗАТЕЛЬНО!
 
 ========================================================================
 [c]
+    $ export AWS_ACCESS_KEY_ID=XXXXXX
+    $ export AWS_SECRET_ACCESS_KEY=XXXXXXX
+    $ export AWS_DEFAULT_REGION=XXXXXXX
+    $ aws s3 ls
+в ответ не должно быть ничего, если нет рабочих нод и т.п.
+    $ eksctl create cluster -f 1-mycluster.yaml --dry-run
+apiVersion: eksctl.io/v1alpha5
+availabilityZones:
+...
+
+-----------------------
+https://hub.docker.com/         login
+#    $ kubectl run hello --generator=run-pod/v1 --image=azrubael/first-steps:latest --port=80
+# Устарело после Kubernetes 1.16 !!!
+    $ kubectl run hello --image=azrubael/first-steps:latest --port=80 --dry-run=client
+# дальше не стал работать с этим вариантом из-за того, что поднимется платный нод
+[video 04:00]
+    
+-----------------------
 
 [c.3] Create a pod "myweb" with one apache container
+    $ vim 2-azapache.yaml
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name  : azapache-230811
+  region: eu-central-1
+
+spec:
+  containers:
+    - name             : azapache-worker
+      instanceType     : t3.micro
+
+-----------------------
+    $ kubectl apply -f 2-azapache.yaml --dry-run=client
+# ERROR
+# The connection to the server localhost:8080 was refused - did you specify the right host or port?
+    $ kubectl config view
+apiVersion: v1
+clusters: null
+contexts: null
+current-context: ""
+kind: Config
+preferences:
+    $ kubectl config get-contexts
+CURRENT   NAME   CLUSTER   AUTHINFO   NAMESPACE
+
+# https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-em-set-context-em- 
+
+##############################################
+created a new user 'awsuhcli'
+    $ aws configure
+    $ aws configure
+AWS Access Key ID [****************32UJ]: 
+AWS Secret Access Key [****************85bc]: 
+Default region name [*******]: 
+Default output format [json]: 
+##############################################
+    $ kubectl config current-context
+docker-desktop
+    $ kubectl apply -f /mnt/SSDATA/CODE/Python-projects/230608-cont/230810-2pods/2-azapache.yaml --dry-run=client
+pod/azapache-230811 created (dry run)
 
 
+-----------------------
 [c.4] Create a pod "myapp" with two containers
 
 
