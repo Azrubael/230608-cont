@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name  : azapp-230812
+  labels:
+    env  : training
+    app  : main
+    tier : backend
+    owner: azrubael
+
+spec:
+  containers:
+    - name  : aznginx-worker
+      image : httpd:latest
+      ports :
+        - containerPort: 80
+        
+    - name  : aztomcat-worker
+      image : tomcat:8.5.38
+      ports :
+        - containerPort: 8080
