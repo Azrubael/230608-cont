@@ -104,6 +104,18 @@ CONTAINER ID   IMAGE                         COMMAND                  CREATED   
 # Remove unwanted container
     $ docker rm 54d32f7fccc7 -f
 54d32f7fccc7
+
+To view all containers — active and inactive, run docker ps with the -a switch:
+    $ docker ps -a
     $ docker container ls -as
-CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES     SIZE
-    $ 
+
+    $ sudo ps -a
+    
+    ps: lists the processes executing in the current terminal for the current user
+    ps ax: lists all processes currently executing for all users  
+    ps e: shows the environment for the processes listed  
+    kill PID: sends the SIGTERM signal to the process identified by PID
+    fg: causes a job that was stopped or in the background to return to the foreground
+    bg: causes a job that was stopped to go to the background
+    jobs: lists the jobs currently running or stopped
+    top: shows the processes currently using the most CPU time 
