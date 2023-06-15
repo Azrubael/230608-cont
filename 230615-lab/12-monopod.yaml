@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name  : azapache-minikube
+  labels:
+    env  : training
+    app  : main
+    tier : backend
+    owner: azrubael
+
+spec:
+  containers:
+    - name  : azapache-singleton
+      image : nginx:latest
+#      image : httpd:latest
+      ports :
+        - containerPort: 80
+
